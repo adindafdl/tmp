@@ -122,7 +122,7 @@ export default async function HomePage() {
               </svg>
             </div>
             <h2 className="text-lg font-bold text-zinc-900">
-              Prosedur &amp; Tata Tertib
+              Jenis Layanan &amp; Tata Tertib
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-zinc-600">
               Tata cara ziarah dan peraturan di area TMP agar kegiatan berjalan
