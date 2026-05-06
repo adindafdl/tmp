@@ -145,7 +145,7 @@ export default function PelayananPage() {
           </h2>
           <div className="mt-6 p-8 rounded-2xl border border-zinc-200 bg-white shadow-sm relative overflow-hidden">
             <p className="text-sm text-zinc-800 text-justify leading-relaxed mb-10 italic font-medium">
-              "Disamping pemberian pelayanan pemakaman dan ziarah, maka TMP dalam hal tertentu dapat digunakan sebagai lembaga pelayanan studi".
+              &quot;Disamping pemberian pelayanan pemakaman dan ziarah, maka TMP dalam hal tertentu dapat digunakan sebagai lembaga pelayanan studi&quot;.
             </p>
             
             <div className="grid gap-10 md:grid-cols-3">

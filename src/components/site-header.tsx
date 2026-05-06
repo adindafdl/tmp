@@ -20,11 +20,11 @@ function LogoMark() {
 
 export function SiteHeader() {
   return (
-    <header className="relative z-20 rounded-b-[1.75rem] bg-[#b91c1c] text-white shadow-lg">
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 pb-6 pt-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+    <header className="relative z-20 rounded-b-[1.75rem] bg-[#14532d] text-white shadow-lg">
+      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-3 pb-6 pt-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
         <Link
           href="/"
-          className="group flex min-w-0 items-center gap-3 rounded-2xl bg-[#991b1b]/90 px-3 py-2 pr-4 ring-1 ring-white/10 transition hover:bg-[#991b1b]"
+          className="group flex min-w-0 items-center gap-3 rounded-2xl bg-[#166534]/90 px-3 py-2 pr-4 ring-1 ring-white/10 transition hover:bg-[#166534]"
         >
           <LogoMark />
           <div className="min-w-0 leading-tight">

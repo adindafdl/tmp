@@ -1,16 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { getZiarahSummary } from '../../lib/queries/public-data';
+import { getTamuUmumPage } from '../../lib/queries/public-data';
 
 export default async function HomePage() {
-  let ziarah = { tamuUmum30d: 0, rombongan30d: 0 };
+  let totalKunjungan = 0;
   try {
-    ziarah = await getZiarahSummary();
+    // Ambil total entri agar kartu ini nyambung ke halaman `daftar-kunjungan`.
+    const res = await getTamuUmumPage({ page: 1, search: "" });
+    totalKunjungan = res.total;
   } catch {
     /* tampilkan fallback jika DB belum siap */
   }
-
-  const totalKunjungan = ziarah.tamuUmum30d + ziarah.rombongan30d;
 
   return (
     <div className="bg-white">
@@ -40,7 +40,7 @@ export default async function HomePage() {
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link
               href="/daftar-makam"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#b91c1c] px-5 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#991b1b]"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#14532d] px-5 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#166534] focus-visible:outline-none focus-visible:ring-0"
             >
               <svg
                 className="h-5 w-5"
@@ -56,7 +56,7 @@ export default async function HomePage() {
             </Link>
             <Link
               href="/peta-tmp"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-[#b91c1c] bg-white px-5 py-3 text-sm font-semibold text-[#b91c1c] shadow-sm transition hover:bg-zinc-50"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-[#14532d] bg-white px-5 py-3 text-sm font-semibold text-[#14532d] shadow-sm transition hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-0"
             >
               <svg
                 className="h-5 w-5"
@@ -76,7 +76,7 @@ export default async function HomePage() {
       <section className="mx-auto max-w-6xl px-4 py-12">
         <div className="grid gap-6 md:grid-cols-3">
           <article className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-zinc-200/80">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#fef2f2] text-[#b91c1c]">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#ecfdf3] text-[#14532d]">
               <svg className="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M6 2h12v2H6V2zm0 4h12v16H6V6zm2 2v12h8V8H8zm2 2h4v2h-4v-2zm0 4h4v2h-4v-2z" />
               </svg>
@@ -88,7 +88,7 @@ export default async function HomePage() {
             </p>
             <Link
               href="/sejarah"
-              className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#b91c1c] hover:underline"
+              className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#14532d] hover:underline focus-visible:outline-none focus-visible:ring-0"
             >
               Selengkapnya <span aria-hidden>→</span>
             </Link>
@@ -100,23 +100,26 @@ export default async function HomePage() {
                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" />
               </svg>
             </div>
-            <h2 className="text-lg font-bold text-zinc-900">Info Ziarah</h2>
+            <h2 className="text-lg font-bold text-zinc-900">Daftar Kunjungan</h2>
             <p className="mt-2 text-sm leading-relaxed text-zinc-600">
-              Ringkasan kunjungan (30 hari terakhir):{' '}
-              <strong>{totalKunjungan}</strong> entri tamu terdaftar di sistem
-              ({ziarah.tamuUmum30d} umum, {ziarah.rombongan30d} rombongan). Lihat
-              prosedur dan tata tertib sebelum berkunjung.
+              Ringkasan kunjungan: <strong>{totalKunjungan}</strong> entri tamu terdaftar di sistem.
             </p>
             <Link
-              href="/prosedur"
-              className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#14532d] hover:underline"
+              href="/daftar-kunjungan"
+              className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#14532d] hover:underline focus-visible:outline-none focus-visible:ring-0"
             >
-              Selengkapnya <span aria-hidden>→</span>
+              Lihat Daftar Kunjungan <span aria-hidden>→</span>
+            </Link>
+            <Link
+              href="/daftar-makam"
+              className="mt-3 inline-flex items-center justify-center gap-2 rounded-xl border-2 border-[#14532d] bg-white px-4 py-2 text-sm font-semibold text-[#14532d] shadow-sm transition hover:bg-[#ecfdf3] focus-visible:outline-none focus-visible:ring-0"
+            >
+              Daftar Makam <span aria-hidden>→</span>
             </Link>
           </article>
 
           <article className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-zinc-200/80">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#fef2f2] text-[#b91c1c]">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#ecfdf3] text-[#14532d]">
               <svg className="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M9 3h6v2H9V3zm0 4h6v2H9V7zm-4 4h14v10H5V11zm2 2v6h10v-6H7z" />
               </svg>
@@ -130,7 +133,7 @@ export default async function HomePage() {
             </p>
             <Link
               href="/prosedur"
-              className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#b91c1c] hover:underline"
+              className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#14532d] hover:underline focus-visible:outline-none focus-visible:ring-0"
             >
               Selengkapnya <span aria-hidden>→</span>
             </Link>

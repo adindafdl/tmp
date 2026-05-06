@@ -20,7 +20,7 @@ function first(v: string | string[] | undefined): string | undefined {
 
 function TombstoneIcon({ variant }: { variant: 'red' | 'green' }) {
   const cls =
-    variant === 'red' ? 'text-[#b91c1c]' : 'text-[#14532d]';
+    variant === 'red' ? 'text-[#14532d]' : 'text-[#14532d]';
   return (
     <svg className={`h-10 w-10 ${cls}`} fill="currentColor" viewBox="0 0 24 24">
       <path d="M12 3 5 7v3h2v9h10v-9h2V7l-7-4Zm0 2.2L16.5 8V18h-9V8L12 5.2Z" />
@@ -106,9 +106,9 @@ export default async function DaftarMakamPage({
               <Link
                 key={b.id}
                 href={`/daftar-makam?blok=${encodeURIComponent(b.id)}`}
-                className={`flex items-center gap-4 rounded-2xl bg-white p-5 shadow-md ring-1 transition hover:ring-[#b91c1c]/40 ${
+                className={`flex items-center gap-4 rounded-2xl bg-white p-5 shadow-md ring-1 transition hover:ring-[#14532d]/40 ${
                   blokId === b.id
-                    ? 'ring-2 ring-[#b91c1c]'
+                    ? 'ring-2 ring-[#14532d]'
                     : 'ring-zinc-200'
                 }`}
               >
@@ -165,7 +165,7 @@ export default async function DaftarMakamPage({
             </form>
 
             {!table ? (
-              <p className="mt-8 text-sm text-red-600">
+              <p className="mt-8 text-sm text-[#14532d]">
                 Tidak dapat memuat data makam untuk blok ini.
               </p>
             ) : (

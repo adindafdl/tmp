@@ -8,7 +8,7 @@ export default function PetaTmpPage() {
         <p className="mt-2 max-w-2xl text-sm text-zinc-600">
           Lokasi Taman Makam Pahlawan Kusuma Bhakti pada peta. Anda juga dapat melihat
           daftar makam per blok di halaman{' '}
-          <Link href="/daftar-makam" className="font-semibold text-[#b91c1c] underline">
+          <Link href="/daftar-makam" className="font-semibold text-[#14532d] underline">
             Daftar Makam
           </Link>
           .
