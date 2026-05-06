@@ -1,3 +1,5 @@
+import { BackToHome } from '@/components/back-to-home';
+
 export default function PelayananPage() {
   const prosedurPemakaman = [
     {
@@ -29,8 +31,9 @@ export default function PelayananPage() {
   ];
 
   return (
-    <div className="bg-white px-4 py-12">
-      <div className="mx-auto max-w-6xl">
+    <div className="bg-white px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-screen-2xl">
+        <BackToHome className="mb-8" />
         <header className="mb-12">
           <h1 className="text-3xl font-bold text-zinc-900">Jenis Pelayanan & Tata Tertib</h1>
           <p className="mt-2 text-zinc-600 text-justify">

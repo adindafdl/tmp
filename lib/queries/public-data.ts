@@ -10,6 +10,21 @@ function sanitizeIlike(raw: string): string {
 export type BlokRow = Database['public']['Tables']['blok']['Row'];
 export type MakamRow = Database['public']['Tables']['makam']['Row'];
 
+function matchesMakamSearch(row: MakamRow, search: string): boolean {
+  const key = search.trim().toLowerCase();
+  if (!key) return true;
+  const fields = [
+    row.nama,
+    row.nomor,
+    row.nrp ?? '',
+    row.pangkat ?? '',
+    row.kesatuan ?? '',
+    row.tanggal_lahir ?? '',
+    row.tanggal_gugur ?? '',
+  ];
+  return fields.some((value) => String(value).toLowerCase().includes(key));
+}
+
 export async function getBloks(): Promise<BlokRow[]> {
   const supabase = createServerSupabaseClient();
   const { data, error } = await supabase
@@ -56,43 +71,22 @@ export async function getMakamPage(params: {
   search: string;
 }): Promise<{ rows: MakamRow[]; total: number; page: number }> {
   const supabase = createServerSupabaseClient();
-  const s = params.search.trim();
-
-  let countQ = supabase
+  const s = params.search;
+  const { data, error } = await supabase
     .from('makam')
-    .select('*', { count: 'exact', head: true })
-    .eq('blok_id', params.blokId);
+    .select('*')
+    .eq('blok_id', params.blokId)
+    .order('nomor', { ascending: true });
 
-  if (s) {
-    const safe = sanitizeIlike(s);
-    countQ = countQ.or(`nama.ilike.%${safe}%,nomor.ilike.%${safe}%`);
-  }
+  if (error) throw new Error(error.message);
 
-  const { count, error: countErr } = await countQ;
-  if (countErr) throw new Error(countErr.message);
-
-  const total = count ?? 0;
+  const filtered = (data ?? []).filter((row) => matchesMakamSearch(row, s));
+  const total = filtered.length;
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
   const page = Math.min(Math.max(1, params.page), totalPages);
   const from = (page - 1) * PAGE_SIZE;
   const to = from + PAGE_SIZE - 1;
-
-  let q = supabase
-    .from('makam')
-    .select('*')
-    .eq('blok_id', params.blokId);
-
-  if (s) {
-    const safe = sanitizeIlike(s);
-    q = q.or(`nama.ilike.%${safe}%,nomor.ilike.%${safe}%`);
-  }
-
-  const { data, error } = await q
-    .order('nomor', { ascending: true })
-    .range(from, to);
-
-  if (error) throw new Error(error.message);
-  return { rows: data ?? [], total, page };
+  return { rows: filtered.slice(from, to + 1), total, page };
 }
 
 export function makamPageSize(): number {

@@ -24,10 +24,10 @@ export default async function HomePage() {
           sizes="100vw"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-b from-white/25 via-white/75 to-white"
+          className="absolute inset-0 bg-linear-to-b from-white/25 via-white/75 to-white"
           aria-hidden
         />
-        <div className="relative z-10 mx-auto flex max-w-6xl flex-col gap-6 px-4 pb-14 pt-16 sm:pt-20">
+        <div className="relative z-10 mx-auto flex w-full max-w-screen-2xl flex-col gap-6 px-4 pb-14 pt-16 sm:px-6 sm:pt-20 lg:px-8">
           <h1 className="max-w-3xl text-2xl font-bold leading-tight text-zinc-900 sm:text-3xl md:text-4xl">
             Selamat Datang di Taman Makam Pahlawan Kusuma Bhakti
           </h1>
@@ -37,44 +37,11 @@ export default async function HomePage() {
             Kusuma Bhakti. Mari jaga kehormatan dan ketenangan tempat peristirahatan
             para pahlawan bangsa.
           </p>
-          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <Link
-              href="/daftar-makam"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#14532d] px-5 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#166534] focus-visible:outline-none focus-visible:ring-0"
-            >
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
-                <circle cx="11" cy="11" r="7" />
-                <path d="m20 20-3-3" strokeLinecap="round" />
-              </svg>
-              Cari Makam
-            </Link>
-            <Link
-              href="/peta-tmp"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-[#14532d] bg-white px-5 py-3 text-sm font-semibold text-[#14532d] shadow-sm transition hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-0"
-            >
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M9 20l-5.447-2.724A1 1 0 0 1 3 16.382V5.618a1 1 0 0 1 .553-.894L9 2l6 3 5.447-2.724A1 1 0 0 1 22 3.382v10.764a1 1 0 0 1-.553.894L15 20l-6-3z" />
-              </svg>
-              Lihat Peta TMP
-            </Link>
-          </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-12">
-        <div className="grid gap-6 md:grid-cols-3">
+      <section className="mx-auto w-full max-w-screen-2xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           <article className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-zinc-200/80">
             <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#ecfdf3] text-[#14532d]">
               <svg className="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">
@@ -110,11 +77,24 @@ export default async function HomePage() {
             >
               Lihat Daftar Kunjungan <span aria-hidden>→</span>
             </Link>
+          </article>
+
+          <article className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-zinc-200/80">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#ecfdf3] text-[#14532d]">
+              <svg className="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 3 5 7v3h2v9h10v-9h2V7l-7-4Zm0 2.2L16.5 8V18h-9V8L12 5.2Z" />
+              </svg>
+            </div>
+            <h2 className="text-lg font-bold text-zinc-900">Daftar Makam</h2>
+            <p className="mt-2 text-sm leading-relaxed text-zinc-600">
+              Telusuri data makam per blok untuk menemukan lokasi pahlawan secara
+              lebih cepat.
+            </p>
             <Link
               href="/daftar-makam"
-              className="mt-3 inline-flex items-center justify-center gap-2 rounded-xl border-2 border-[#14532d] bg-white px-4 py-2 text-sm font-semibold text-[#14532d] shadow-sm transition hover:bg-[#ecfdf3] focus-visible:outline-none focus-visible:ring-0"
+              className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#14532d] hover:underline focus-visible:outline-none focus-visible:ring-0"
             >
-              Daftar Makam <span aria-hidden>→</span>
+              Lihat Daftar Makam <span aria-hidden>→</span>
             </Link>
           </article>
 
@@ -141,8 +121,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-zinc-200 bg-zinc-50 px-4 py-12">
-        <div className="mx-auto max-w-6xl">
+      <section className="border-t border-zinc-200 bg-zinc-50 px-4 py-12 sm:px-6 lg:px-8">
+        <div className="mx-auto w-full max-w-screen-2xl">
           <div className="mb-6 flex items-start gap-3">
             <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#ecfdf3] text-[#14532d]">
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">

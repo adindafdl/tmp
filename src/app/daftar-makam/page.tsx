@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { BackToHome } from '@/components/back-to-home';
 import {
   getBloks,
   getMakamPage,
@@ -88,8 +89,9 @@ export default async function DaftarMakamPage({
   };
 
   return (
-    <div className="bg-zinc-100 px-4 py-10">
-      <div className="mx-auto max-w-6xl">
+    <div className="bg-zinc-100 px-4 py-10 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-screen-2xl">
+        <BackToHome className="mb-6" />
         <h1 className="text-2xl font-bold text-zinc-900">Daftar Makam &amp; Blok</h1>
         <p className="mt-2 max-w-2xl text-sm text-zinc-600">
           Pilih blok untuk melihat daftar makam. Data diambil dari basis data resmi
@@ -152,7 +154,7 @@ export default async function DaftarMakamPage({
                 <input
                   name="q"
                   defaultValue={q}
-                  placeholder="Cari nama atau nomor makam..."
+                  placeholder="Cari nama, pangkat, kesatuan, NRP, atau nomor..."
                   className="w-full rounded-xl border border-zinc-200 bg-zinc-50 py-3 pl-11 pr-4 text-sm outline-none ring-[#14532d] focus:ring-2"
                 />
               </div>
@@ -177,10 +179,10 @@ export default async function DaftarMakamPage({
                         <th className="px-3 py-3 font-semibold">No</th>
                         <th className="px-3 py-3 font-semibold">Nama Pahlawan</th>
                         <th className="px-3 py-3 font-semibold">Pangkat</th>
-                        <th className="px-3 py-3 font-semibold min-w-[10rem]">
+                        <th className="px-3 py-3 font-semibold min-w-40">
                           Tempat, Tgl. Lahir
                         </th>
-                        <th className="px-3 py-3 font-semibold min-w-[10rem]">
+                        <th className="px-3 py-3 font-semibold min-w-40">
                           Tempat, Tgl. Wafat
                         </th>
                       </tr>

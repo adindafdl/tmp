@@ -1,9 +1,11 @@
 import Link from 'next/link';
+import { BackToHome } from '@/components/back-to-home';
 
 export default function PetaTmpPage() {
   return (
-    <div className="bg-zinc-100 px-4 py-10">
-      <div className="mx-auto max-w-6xl">
+    <div className="bg-zinc-100 px-4 py-10 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-screen-2xl">
+        <BackToHome className="mb-6" />
         <h1 className="text-2xl font-bold text-zinc-900">Peta TMP</h1>
         <p className="mt-2 max-w-2xl text-sm text-zinc-600">
           Lokasi Taman Makam Pahlawan Kusuma Bhakti pada peta. Anda juga dapat melihat
