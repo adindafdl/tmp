@@ -26,15 +26,19 @@ export function SiteHeader() {
           href="/"
           className="group flex min-w-0 items-center gap-3 rounded-2xl bg-[#166534]/90 px-3 py-2 pr-4 ring-1 ring-white/10 transition hover:bg-[#166534]"
         >
-          <LogoMark />
+          {/* Langsung gambar logo, tanpa background putih */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/img/tmp.png"
+            alt="Logo TMP Kusuma Bhakti"
+            className="h-11 w-11 object-contain"
+          />
           <div className="min-w-0 leading-tight">
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-white/80">
-              TMP
-            </p>
             <p className="text-sm font-bold sm:text-base">
               Taman Makam Pahlawan Kusuma Bhakti
             </p>
           </div>
+    
         </Link>
         <SiteNav />
       </div>

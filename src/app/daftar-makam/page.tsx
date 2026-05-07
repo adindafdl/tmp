@@ -12,6 +12,7 @@ type SearchParams = Promise<{
   blok?: string | string[];
   page?: string | string[];
   q?: string | string[];
+  view?: string | string[];
 }>;
 
 function first(v: string | string[] | undefined): string | undefined {
@@ -38,7 +39,9 @@ export default async function DaftarMakamPage({
   const blokId = first(sp.blok);
   const pageRaw = first(sp.page);
   const q = first(sp.q) ?? '';
+  const viewRaw = first(sp.view);
   const page = Math.max(1, parseInt(pageRaw ?? '1', 10) || 1);
+  const viewMode = viewRaw === 'card' ? 'card' : 'table';
 
   let bloks: BlokRow[] = [];
   try {
@@ -85,11 +88,21 @@ export default async function DaftarMakamPage({
     params.set('blok', blokId!);
     if (p > 1) params.set('page', String(p));
     if (q.trim()) params.set('q', q.trim());
+    params.set('view', viewMode);
+    return `/daftar-makam?${params.toString()}`;
+  };
+
+  const buildViewHref = (view: 'table' | 'card') => {
+    const params = new URLSearchParams();
+    params.set('blok', blokId!);
+    if (effectivePage > 1) params.set('page', String(effectivePage));
+    if (q.trim()) params.set('q', q.trim());
+    params.set('view', view);
     return `/daftar-makam?${params.toString()}`;
   };
 
   return (
-    <div className="bg-zinc-100 px-4 py-10 sm:px-6 lg:px-8">
+    <div className="px-4 py-10 sm:px-6 lg:px-8">
       <div className="mx-auto w-full max-w-screen-2xl">
         <BackToHome className="mb-6" />
         <h1 className="text-2xl font-bold text-zinc-900">Daftar Makam &amp; Blok</h1>
@@ -108,7 +121,7 @@ export default async function DaftarMakamPage({
               <Link
                 key={b.id}
                 href={`/daftar-makam?blok=${encodeURIComponent(b.id)}`}
-                className={`flex items-center gap-4 rounded-2xl bg-white p-5 shadow-md ring-1 transition hover:ring-[#14532d]/40 ${
+                className={`tmp-card flex items-center gap-4 p-5 ${
                   blokId === b.id
                     ? 'ring-2 ring-[#14532d]'
                     : 'ring-zinc-200'
@@ -127,7 +140,7 @@ export default async function DaftarMakamPage({
         </div>
 
         {blokId && (
-          <div className="mt-10 rounded-2xl bg-white p-5 shadow-lg ring-1 ring-zinc-200 sm:p-8">
+          <div className="tmp-surface mt-10 rounded-2xl p-5 shadow-lg ring-1 ring-zinc-200 sm:p-8">
             <h2 className="text-xl font-bold text-zinc-900">
               {table?.blokNama ?? 'Blok'}
             </h2>
@@ -138,6 +151,7 @@ export default async function DaftarMakamPage({
               className="mt-6 flex flex-col gap-3 sm:flex-row"
             >
               <input type="hidden" name="blok" value={blokId} />
+              <input type="hidden" name="view" value={viewMode} />
               <div className="relative flex-1">
                 <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400">
                   <svg
@@ -160,7 +174,7 @@ export default async function DaftarMakamPage({
               </div>
               <button
                 type="submit"
-                className="rounded-xl bg-[#14532d] px-6 py-3 text-sm font-semibold text-white hover:bg-[#166534]"
+                className="tmp-btn rounded-xl bg-[#14532d] px-6 py-3 text-sm font-semibold text-white hover:bg-[#166534]"
               >
                 Cari
               </button>
@@ -172,12 +186,39 @@ export default async function DaftarMakamPage({
               </p>
             ) : (
               <>
-                <div className="mt-6 overflow-x-auto rounded-xl ring-1 ring-zinc-200">
+                <div className="mt-6 flex flex-wrap items-center gap-2">
+                  <span className="text-sm font-medium text-zinc-700">Mode tampilan:</span>
+                  <Link
+                    href={buildViewHref('table')}
+                    className={`rounded-lg px-3 py-1.5 text-sm font-medium ${
+                      viewMode === 'table'
+                        ? 'bg-[#14532d] text-white'
+                        : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200'
+                    }`}
+                  >
+                    Tabel
+                  </Link>
+                  <Link
+                    href={buildViewHref('card')}
+                    className={`rounded-lg px-3 py-1.5 text-sm font-medium ${
+                      viewMode === 'card'
+                        ? 'bg-[#14532d] text-white'
+                        : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200'
+                    }`}
+                  >
+                    Card
+                  </Link>
+                </div>
+
+                {viewMode === 'table' ? (
+                <div className="mt-4 overflow-x-auto rounded-xl ring-1 ring-zinc-200">
                   <table className="min-w-full text-left text-sm">
                     <thead>
                       <tr className="bg-[#14532d] text-white">
                         <th className="px-3 py-3 font-semibold">No</th>
                         <th className="px-3 py-3 font-semibold">Nama Pahlawan</th>
+                        <th className="px-3 py-3 font-semibold">No. Makam</th>
+                        <th className="px-3 py-3 font-semibold">NRP</th>
                         <th className="px-3 py-3 font-semibold">Pangkat</th>
                         <th className="px-3 py-3 font-semibold min-w-40">
                           Tempat, Tgl. Lahir
@@ -191,7 +232,7 @@ export default async function DaftarMakamPage({
                       {table.rows.length === 0 ? (
                         <tr>
                           <td
-                            colSpan={5}
+                            colSpan={7}
                             className="px-3 py-8 text-center text-zinc-500"
                           >
                             Tidak ada data yang cocok.
@@ -210,6 +251,12 @@ export default async function DaftarMakamPage({
                               {row.nama}
                             </td>
                             <td className="px-3 py-3 text-zinc-700">
+                              {row.nomor}
+                            </td>
+                            <td className="px-3 py-3 text-zinc-700">
+                              {row.nrp ?? '—'}
+                            </td>
+                            <td className="px-3 py-3 text-zinc-700">
                               {row.pangkat ?? '—'}
                             </td>
                             <td className="px-3 py-3 text-zinc-700">
@@ -224,6 +271,31 @@ export default async function DaftarMakamPage({
                     </tbody>
                   </table>
                 </div>
+                ) : (
+                  <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                    {table.rows.length === 0 ? (
+                      <p className="tmp-surface rounded-2xl p-6 text-sm text-zinc-500 ring-1 ring-zinc-200">
+                        Tidak ada data yang cocok.
+                      </p>
+                    ) : (
+                      table.rows.map((row, idx) => (
+                        <article key={row.id} className="tmp-card p-4 text-sm">
+                          <p className="text-xs text-zinc-500">
+                            No. {(effectivePage - 1) * pageSize + idx + 1}
+                          </p>
+                          <p className="mt-1 text-base font-semibold text-zinc-900">{row.nama}</p>
+                          <div className="mt-3 space-y-1.5 text-zinc-700">
+                            <p><span className="font-medium text-zinc-900">No. Makam:</span> {row.nomor}</p>
+                            <p><span className="font-medium text-zinc-900">NRP:</span> {row.nrp ?? '—'}</p>
+                            <p><span className="font-medium text-zinc-900">Pangkat:</span> {row.pangkat ?? '—'}</p>
+                            <p><span className="font-medium text-zinc-900">Tgl. Lahir:</span> {formatTanggal(row.tanggal_lahir)}</p>
+                            <p><span className="font-medium text-zinc-900">Tgl. Wafat:</span> {formatTanggal(row.tanggal_gugur)}</p>
+                          </div>
+                        </article>
+                      ))
+                    )}
+                  </div>
+                )}
 
                 {table.total > pageSize && (
                   <nav

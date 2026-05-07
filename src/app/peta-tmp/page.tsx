@@ -3,7 +3,7 @@ import { BackToHome } from '@/components/back-to-home';
 
 export default function PetaTmpPage() {
   return (
-    <div className="bg-zinc-100 px-4 py-10 sm:px-6 lg:px-8">
+    <div className="px-4 py-10 sm:px-6 lg:px-8">
       <div className="mx-auto w-full max-w-screen-2xl">
         <BackToHome className="mb-6" />
         <h1 className="text-2xl font-bold text-zinc-900">Peta TMP</h1>
@@ -15,7 +15,7 @@ export default function PetaTmpPage() {
           </Link>
           .
         </p>
-        <div className="mt-8 overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-zinc-200">
+        <div className="tmp-surface mt-8 overflow-hidden rounded-2xl shadow-lg ring-1 ring-zinc-200">
           <iframe
             title="Peta Taman Makam Pahlawan Kusuma Bhakti"
             src="https://www.google.com/maps?q=Taman+Makam+Pahlawan+Kusuma+Bhakti&output=embed"

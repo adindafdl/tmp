@@ -31,10 +31,10 @@ export default function PelayananPage() {
   ];
 
   return (
-    <div className="bg-white px-4 py-12 sm:px-6 lg:px-8">
+    <div className="px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto w-full max-w-screen-2xl">
         <BackToHome className="mb-8" />
-        <header className="mb-12">
+        <header className="tmp-surface mb-12 rounded-2xl border border-zinc-200 p-6 shadow-sm">
           <h1 className="text-3xl font-bold text-zinc-900">Jenis Pelayanan & Tata Tertib</h1>
           <p className="mt-2 text-zinc-600 text-justify">
             Informasi lengkap mengenai layanan pemakaman, ziarah, studi, dan tata tertib pelaksanaan kunjungan di TMP Kusuma Bhakti Jurug Surakarta.
@@ -43,7 +43,7 @@ export default function PelayananPage() {
 
         {/* ── A. PEMAKAMAN ── */}
         <section className="mt-10">
-          <h2 className="text-xl font-bold text-red-700 border-b-2 border-red-700 pb-2 uppercase italic">
+          <h2 className="text-xl font-bold text-[#14532d] border-b-2 border-[#14532d] pb-2 uppercase italic">
             A. Pemakaman
           </h2>
           <div className="mt-6 space-y-6">
@@ -76,7 +76,7 @@ export default function PelayananPage() {
           <p className="mt-4 text-sm text-zinc-700 italic">TMP Kusuma Bhakti Jurug terbuka bagi masyarakat umum.</p>
           
           <div className="mt-8 grid gap-12 lg:grid-cols-2">
-            <div className="bg-zinc-50 p-6 rounded-xl border border-zinc-200">
+            <div className="tmp-card p-6">
               <h3 className="font-bold text-white bg-green-700 px-4 py-2 rounded-lg inline-block mb-4">
                 1. Ziarah Perorangan
               </h3>
@@ -93,8 +93,8 @@ export default function PelayananPage() {
               </ol>
             </div>
 
-            <div className="bg-zinc-50 p-6 rounded-xl border border-zinc-200">
-              <h3 className="font-bold text-white bg-red-800 px-4 py-2 rounded-lg inline-block mb-4">
+            <div className="tmp-card p-6">
+              <h3 className="font-bold text-white bg-[#14532d] px-4 py-2 rounded-lg inline-block mb-4">
                 2. Ziarah Kelompok atau Rombongan
               </h3>
               <p className="text-sm text-zinc-700 text-justify mb-4 leading-relaxed">
@@ -102,23 +102,23 @@ export default function PelayananPage() {
               </p>
               
               <div className="space-y-6">
-                <div className="p-4 bg-white rounded-lg border border-zinc-200">
-                  <h4 className="font-bold text-xs text-red-800 mb-2 uppercase tracking-wide">Prosedur dengan Upacara Militer:</h4>
+                <div className="p-4 bg-white/90 rounded-lg border border-zinc-200">
+                  <h4 className="font-bold text-xs text-[#14532d] mb-2 uppercase tracking-wide">Prosedur dengan Upacara Militer:</h4>
                   <ul className="space-y-2">
                     {ziarahKelompokUmum.map((item, i) => (
                       <li key={i} className="text-xs text-zinc-600 text-justify flex gap-2">
-                        <span className="text-red-800 font-bold">•</span> {item}
+                        <span className="text-[#14532d] font-bold">•</span> {item}
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="p-4 bg-white rounded-lg border border-zinc-200">
-                  <h4 className="font-bold text-xs text-red-800 mb-2 uppercase tracking-wide">Prosedur tanpa Upacara Militer:</h4>
+                <div className="p-4 bg-white/90 rounded-lg border border-zinc-200">
+                  <h4 className="font-bold text-xs text-[#14532d] mb-2 uppercase tracking-wide">Prosedur tanpa Upacara Militer:</h4>
                   <ul className="space-y-2">
                     {ziarahKelompokUmum.map((item, i) => (
                       <li key={i} className="text-xs text-zinc-600 text-justify flex gap-2">
-                        <span className="text-red-800 font-bold">•</span> {item}
+                        <span className="text-[#14532d] font-bold">•</span> {item}
                       </li>
                     ))}
                   </ul>
@@ -132,7 +132,7 @@ export default function PelayananPage() {
             <h3 className="text-lg font-bold text-zinc-800 mb-6">Macam-macam Ziarah Kelompok:</h3>
             <div className="grid gap-4 md:grid-cols-3">
               {jenisMacamZiarah.map((item) => (
-                <div key={item.kode} className="p-4 bg-zinc-50 rounded-lg border border-zinc-200">
+                <div key={item.kode} className="tmp-card p-4">
                   <h4 className="font-bold text-sm text-zinc-800 mb-2">{item.kode.toUpperCase()}. {item.judul}</h4>
                   <p className="text-xs text-zinc-600 text-justify leading-relaxed">{item.teks}</p>
                 </div>
@@ -143,29 +143,29 @@ export default function PelayananPage() {
 
         {/* ── C. PELAYANAN STUDI ── */}
         <section className="mt-16">
-          <h2 className="text-xl font-bold text-blue-900 border-b-2 border-blue-900 pb-2 uppercase italic">
+          <h2 className="text-xl font-bold text-[#14532d] border-b-2 border-[#14532d] pb-2 uppercase italic">
             C. Pelayanan Studi
           </h2>
-          <div className="mt-6 p-8 rounded-2xl border border-zinc-200 bg-white shadow-sm relative overflow-hidden">
+          <div className="tmp-surface mt-6 p-8 rounded-2xl border border-zinc-200 shadow-sm relative overflow-hidden">
             <p className="text-sm text-zinc-800 text-justify leading-relaxed mb-10 italic font-medium">
               &quot;Disamping pemberian pelayanan pemakaman dan ziarah, maka TMP dalam hal tertentu dapat digunakan sebagai lembaga pelayanan studi&quot;.
             </p>
             
             <div className="grid gap-10 md:grid-cols-3">
               <div className="flex items-start gap-4">
-                <div className="w-10 h-8 bg-blue-900 text-white flex items-center justify-center rounded-lg font-bold shrink-0">1</div>
+                <div className="w-10 h-8 bg-[#14532d] text-white flex items-center justify-center rounded-lg font-bold shrink-0">1</div>
                 <p className="text-xs text-zinc-700 text-justify leading-relaxed">
                   Jenis pelayanan meliputi penyediaan data dan informasi tentang Nilai Kepahlawanan dari yang dimakamkan, penelitian, temu ilmiah, dan lain-lain.
                 </p>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-10 h-8 bg-blue-900 text-white flex items-center justify-center rounded-lg font-bold shrink-0">2</div>
+                <div className="w-10 h-8 bg-[#14532d] text-white flex items-center justify-center rounded-lg font-bold shrink-0">2</div>
                 <p className="text-xs text-zinc-700 text-justify leading-relaxed">
                   Kegiatan studi perorangan maupun kelompok/rombongan memerlukan izin/perjanjian yang dilakukan melalui Dinas Sosial.
                 </p>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-10 h-8 bg-blue-900 text-white flex items-center justify-center rounded-lg font-bold shrink-0">3</div>
+                <div className="w-10 h-8 bg-[#14532d] text-white flex items-center justify-center rounded-lg font-bold shrink-0">3</div>
                 <p className="text-xs text-zinc-700 text-justify leading-relaxed">
                   Kelengkapan fasilitas studi mencakup ketersediaan data informasi, perpustakaan, hingga balai pelestarian.
                 </p>
@@ -188,7 +188,7 @@ export default function PelayananPage() {
                 </ul>
               </div>
               <div className="p-6 border-r border-zinc-100 bg-zinc-50/50">
-                <h5 className="font-bold text-red-700 mb-4 border-b pb-2 uppercase text-xs">B. Peziarah Dilarang:</h5>
+                <h5 className="font-bold text-[#14532d] mb-4 border-b pb-2 uppercase text-xs">B. Peziarah Dilarang:</h5>
                 <ul className="text-[15px] space-y-2 text-zinc-700 list-decimal pl-4">
                   <li className="text-justify">Menimbulkan kegaduhan.</li>
                   <li className="text-justify">Mengucapkan ikrar-ikrar atau pidato.</li>
@@ -203,7 +203,7 @@ export default function PelayananPage() {
                 </ul>
               </div>
               <div className="p-6">
-                <h5 className="font-bold text-orange-800 mb-4 border-b pb-2 uppercase text-xs">C. Larangan di Makam:</h5>
+                <h5 className="font-bold text-[#14532d] mb-4 border-b pb-2 uppercase text-xs">C. Larangan di Makam:</h5>
                 <ul className="text-[15px] space-y-2 text-zinc-700 list-decimal pl-4">
                   <li className="text-justify">Menambah atau mengubah kijing/nisan makam.</li>
                   <li className="text-justify">Menambah batu nisan atau tulisan dengan lambang tertentu.</li>
