@@ -119,7 +119,7 @@ export default function SejarahPage() {
                 />
                 <div className="absolute inset-0 bg-black/30" />
                 <p className="absolute bottom-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-zinc-800">
-                  Makam Jendral Slamet Riyadi
+                  Gumpalan Tanah Brid. Jend. Slamet Riyadi.CS
                 </p>
               </div>
             </div>
