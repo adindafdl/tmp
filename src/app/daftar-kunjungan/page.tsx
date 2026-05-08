@@ -123,7 +123,9 @@ export default async function TamuPage({
                     <ClickableImage
                       src={item.foto_url}
                       alt={`Foto kunjungan ${item.nama}`}
-                      wrapperClassName="h-16 w-16"
+                      wrapperClassName="h-20 w-20"
+                      dialogClassName="max-w-3xl"
+                      dialogImageClassName="max-h-[80vh]"
                     />
                   </td>
                 </tr>
@@ -133,18 +135,20 @@ export default async function TamuPage({
         </table>
       </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4">
           {rows.length === 0 ? (
             <p className="tmp-surface rounded-2xl p-6 text-sm text-zinc-500 ring-1 ring-zinc-200">
               Data kunjungan belum tersedia.
             </p>
           ) : (
             rows.map((item) => (
-              <article key={item.id} className="tmp-card p-4">
+              <article key={item.id} className="tmp-card w-full max-w-sm p-4">
                 <ClickableImage
                   src={item.foto_url}
                   alt={`Foto kunjungan ${item.nama}`}
-                  wrapperClassName="h-40 w-full rounded-xl"
+                  wrapperClassName="aspect-[4/3] w-full rounded-xl"
+                  dialogClassName="max-w-2xl"
+                  dialogImageClassName="max-h-[68vh]"
                 />
                 <div className="mt-3 space-y-1.5 text-sm">
                   <p><span className="font-semibold text-zinc-900">Nama:</span> {item.nama}</p>

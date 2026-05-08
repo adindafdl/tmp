@@ -34,11 +34,18 @@ export default async function HomePage() {
                 <span className="mb-1 block italic">Selamat Datang</span>
                 <span className="block">di Taman Makam Pahlawan Kusuma Bhakti</span>
               </h1>
-              <p className="max-w-2xl text-sm leading-relaxed text-zinc-700 sm:text-base">
+              <p
+                className="max-w-2xl text-sm leading-relaxed text-zinc-700 sm:text-base"
+                style={{ textAlign: 'justify' }}
+              >
                 Situs ini menyediakan informasi untuk masyarakat umum mengenai sejarah,
-                lokasi makam pahlawan, petunjuk ziarah, dan tata tertib di area TMP
-                Kusuma Bhakti. Mari jaga kehormatan dan ketenangan tempat
-                peristirahatan para pahlawan bangsa.
+                lokasi makam pahlawan, petunjuk ziarah, layanan yang tersedia, serta
+                tata tertib di area TMP Kusuma Bhakti. Melalui halaman ini, pengunjung
+                dapat menelusuri daftar kunjungan, melihat informasi makam per blok,
+                dan memperoleh arahan lokasi agar ziarah berjalan lebih tertib. Mari
+                bersama-sama menjaga kehormatan, kebersihan, dan ketenangan tempat
+                peristirahatan para pahlawan bangsa sebagai bentuk penghormatan atas
+                jasa mereka kepada tanah air.
               </p>
             </div>
             <div className="tmp-card relative hidden h-56 overflow-hidden lg:block xl:h-64">

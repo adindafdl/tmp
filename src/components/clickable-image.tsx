@@ -1,18 +1,28 @@
 'use client';
 
 import { useEffect, useId, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 export function ClickableImage({
   src,
   alt,
   wrapperClassName = '',
+  dialogClassName = '',
+  dialogImageClassName = '',
 }: {
   src: string;
   alt: string;
   wrapperClassName?: string;
+  dialogClassName?: string;
+  dialogImageClassName?: string;
 }) {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const titleId = useId();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -52,7 +62,8 @@ export function ClickableImage({
         </span>
       </button>
 
-      {open && (
+      {open && mounted &&
+        createPortal(
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
           role="dialog"
@@ -62,7 +73,9 @@ export function ClickableImage({
             if (e.target === e.currentTarget) setOpen(false);
           }}
         >
-          <div className="w-full max-w-4xl overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-zinc-200">
+          <div
+            className={`w-full max-w-4xl overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-zinc-200 ${dialogClassName}`}
+          >
             <div className="flex items-center justify-between border-b border-zinc-200 px-4 py-3">
               <p id={titleId} className="text-sm font-semibold text-zinc-900">
                 Foto Kunjungan
@@ -81,7 +94,7 @@ export function ClickableImage({
               <img
                 src={src}
                 alt={alt}
-                className="mx-auto max-h-[75vh] w-auto max-w-full rounded-xl object-contain ring-1 ring-zinc-200"
+                className={`mx-auto max-h-[78vh] w-full rounded-xl object-contain ring-1 ring-zinc-200 ${dialogImageClassName}`}
               />
             </div>
 
@@ -96,7 +109,8 @@ export function ClickableImage({
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
