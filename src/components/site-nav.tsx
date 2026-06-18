@@ -1,39 +1,139 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const links = [
-  { href: '/sejarah', label: 'Sejarah' },
-  { href: '/daftar-kunjungan', label: 'Daftar Kunjungan' },
-  { href: '/daftar-makam', label: 'Daftar Makam' },
-  { href: '/peta-tmp', label: 'Peta TMP' },
+  { 
+    href: '/sejarah', 
+    label: 'Sejarah',
+    icon: (
+      <svg className="w-5 h-5 min-w-[20px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+      </svg>
+    )
+  },
+  { 
+    href: '/daftar-kunjungan', 
+    label: 'Daftar Kunjungan',
+    icon: (
+      <svg className="w-5 h-5 min-w-[20px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+      </svg>
+    )
+  },
+  { 
+    href: '/daftar-makam', 
+    label: 'Daftar Makam',
+    icon: (
+      <svg className="w-5 h-5 min-w-[20px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+    )
+  },
+  { 
+    href: '/prosedur', 
+    label: 'Jenis Layanan & Tata Tertib',
+    icon: (
+      <svg className="w-5 h-5 min-w-[20px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+      </svg>
+    )
+  },
+  { 
+    href: '/peta-tmp', 
+    label: 'Peta TMP',
+    icon: (
+      <svg className="w-5 h-5 min-w-[20px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+      </svg>
+    )
+  },
 ] as const;
 
 export function SiteNav() {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false); // Mengubah status dari isCollapsed menjadi isOpen
 
   return (
-    <nav
-      className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm font-medium text-white/95"
-      aria-label="Navigasi utama"
-    >
-      {links.map(({ href, label }) => {
-        const active = pathname === href || pathname.startsWith(`${href}/`);
-        return (
-          <Link
-            key={href}
-            href={href}
-            className={
-              active
-                ? 'rounded-full bg-white/20 px-2.5 py-1 text-white focus-visible:outline-none focus-visible:ring-0'
-                : 'rounded-full px-2.5 py-1 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-0'
-            }
-          >
-            {label}
-          </Link>
-        );
-      })}
-    </nav>
+    <>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="fixed top-6 right-6 z-40 flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-xl bg-emerald-800 text-[#f4f3ef] shadow-md transition-all hover:bg-emerald-900"
+        aria-label="Toggle Sidebar"
+      >
+        <span className={`h-0.5 w-5 bg-current transition-transform duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`} />
+        <span className={`h-0.5 w-5 bg-current transition-opacity duration-300 ${isOpen ? 'opacity-0' : ''}`} />
+        <span className={`h-0.5 w-5 bg-current transition-transform duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+      </button>
+
+      {isOpen && (
+        <div 
+          className="fixed inset-0 z-30 bg-black/20 backdrop-blur-sm"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      <aside 
+        className={`fixed inset-y-0 right-0 z-30 flex h-full w-68 flex-col border-l border-emerald-950/10 bg-[#f4f3ef] px-4 py-6 text-emerald-900 shadow-2xl transition-transform duration-300 ease-in-out ${
+          isOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <div className="mb-8 flex items-center gap-3 px-2 pt-10"> 
+          <div className="flex h-9 w-9 min-w-[36px] items-center justify-center rounded-xl bg-emerald-800 font-bold text-[#f4f3ef] shadow-md">
+            TMP
+          </div>
+          <div className="overflow-hidden whitespace-nowrap">
+            <h1 className="text-sm font-bold tracking-wide text-emerald-950">Navigasi Utama</h1>
+            <p className="text-[11px] text-emerald-700/70 font-medium">Kusuma Bhakti</p>
+          </div>
+        </div>
+
+        <nav className="flex flex-1 flex-col gap-y-1.5" aria-label="Navigasi utama">
+          <p className="px-3 text-[10px] font-bold uppercase tracking-widest text-emerald-800/40 mb-1 overflow-hidden whitespace-nowrap">
+            Menu
+          </p>
+          
+          {links.map(({ href, label, icon }) => {
+            const active = pathname === href || pathname.startsWith(`${href}/`);
+            
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={`group relative flex items-center gap-3.5 rounded-xl px-3.5 py-3 text-sm font-semibold transition-all duration-300 ${
+                  active
+                    ? 'bg-emerald-800 text-white shadow-md'
+                    : 'text-emerald-900/70 hover:bg-emerald-900/5 hover:text-emerald-900'
+                }`}
+              >
+                {active && (
+                  <div className="absolute right-0 top-1/4 h-1/2 w-1 rounded-l-full bg-emerald-400" />
+                )}
+
+                <span className={`transition-transform duration-300 group-hover:scale-110 ${
+                  active ? 'text-white' : 'text-emerald-800/60 group-hover:text-emerald-900'
+                }`}>
+                  {icon}
+                </span>
+
+                <span className="tracking-wide overflow-hidden whitespace-nowrap">
+                  {label}
+                </span>
+              </Link>
+            );
+          })}
+        </nav>
+        <div className="mt-auto border-t border-emerald-900/10 pt-4 px-2">
+          <div className="flex items-center gap-2.5">
+            <div className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
+            <span className="text-[11px] text-emerald-800/50 font-medium tracking-wide whitespace-nowrap">
+              Sistem Aktif
+            </span>
+          </div>
+        </div>
+      </aside>
+    </>
   );
 }
